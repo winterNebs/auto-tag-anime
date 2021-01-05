@@ -2,13 +2,16 @@
 
 ## Changes in this fork:
 
-This fork rewrites tag handling and adds support for lepton files. Only compatible with linux unfortunately. (If you can get exempi to compile on windows then it may work but I gave up)
+This fork rewrites tag handling and adds support for lepton files.
+Only compatible with linux unfortunately. (If you can get exempi to compile on windows then it may work but I gave up)
+
+Uses IPTC Keywords for jpgs and lepton files and XMP Subjects for png files
 
 ## Original description
 
 Automatically adds booru style tags to an image or directory of images by using this neural net model: https://github.com/KichangKim/DeepDanbooru
 
-## Instructions
+## Updated Instructions
 
 **You will need**:
 - lepton https://github.com/dropbox/lepton, follow instructions and build, then put in auto-anime-tag folder
