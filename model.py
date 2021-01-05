@@ -10,11 +10,11 @@ class deepdanbooruModel():
     def load_model(self):
         print('loading model...')
         try:
-            model = tf.keras.models.load_model("./deepdanbooru-v3-20200101-sgd-e30/model-resnet_custom_v3.h5", compile=False)
+            model = tf.keras.models.load_model("./deep/model-resnet_custom_v3.h5", compile=False)
         except:
             print('Model not in folder. Download it from https://github.com/KichangKim/DeepDanbooru')
             sys.exit()
-        with open("./deepdanbooru-v3-20200101-sgd-e30/tags.txt", 'r') as tags_stream:
+        with open("./deep/tags.txt", 'r') as tags_stream:
             self.tags = np.array([tag for tag in (tag.strip() for tag in tags_stream) if tag])
         print('done. Adding tags')
         return model
