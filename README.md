@@ -1,19 +1,24 @@
 # Auto Anime Tag
 
+## Changes in this fork:
+
+This fork rewrites tag handling and adds support for lepton files. Only compatible with linux unfortunately. (If you can get exempi to compile on windows then it may work but I gave up)
+
+## Original description
+
 Automatically adds booru style tags to an image or directory of images by using this neural net model: https://github.com/KichangKim/DeepDanbooru
 
 ## Instructions
 
-1. Download the pre-trained model deepdanbooru-v3 from https://github.com/KichangKim/DeepDanbooru, put the folder 
-containing the model in the auto-tag-anime folder
+**You will need**:
+- lepton https://github.com/dropbox/lepton, follow instructions and build, then put in auto-anime-tag folder
+- pre-trained model deepdanbooru-v3 from https://github.com/KichangKim/DeepDanbooru, grab the model from the 'releases' section, or train your own, then put in auto-anime-tag folder
+- Exempi, install with your package manager
+- Python 3.8 (3.9 will not work for now)
 
-2. `python3 -m venv ./env`
-
-3. On osx: `source env/bin/activate`
-
-   On Windows: `./env/Scripts/activate`
-
-2. `python setup.py install`
+1. `git clone https://github.com/winterNebs/auto-tag-anime`
+2. `cd auto-tag-anime`
+3. `python3.8 -m pip install -r requirements.txt`
 
 ## How to use
 `python3 auto-tag-anime.py "example.jpg"`
@@ -22,6 +27,5 @@ containing the model in the auto-tag-anime folder
 
 
 ## Notes
-* windows version only works with jpegs
 * See a list of tags the model will predict in 'tags.txt' inside of the deepdanbooru-v3 folder
 * checks for images in subdirectories 
