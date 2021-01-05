@@ -22,25 +22,32 @@ class addAnimeTags():
 
     def addTagsToImage(self, path):
 
-        # goals:
-        # 1. figure out paths?
-        # 2. figure out tagging
-        # testing here
-        # self.add_tags(path,["test"])
         exts = [".png", ".lep", ".jpg", ".jpeg", ".jfif"]
         filename, file_extension = os.path.splitext(path)
         if file_extension.lower() not in exts:
             return 'invalid file type'
 
-        # if file_extension.lower() == ".lep":
-        #     # convert to jpg temperarily
-        #     subprocess.run(["./lepton-slow-best-ratio.exe", path])
-        #     # eval then add tags
-        #     # convert back
+        new_path = path
+        if file_extension.lower() == ".lep":
+            # convert to jpg temperarily
+            new_path = filename + ".jpg"
+            completed = subprocess.run(["./lepton-slow-best-ratio", path, "-o", new_path])
 
-        status, tags = self.model.classify_image(path)
+            if completed.returncode != 0:
+                return 'failed to add tags for ' + path
+
+            os.remove(path)
+            # eval then add tags
+            # convert back
+
+        status, tags = self.model.classify_image(new_path)
         if status == 'success':
-            self.add_tags(path, tags)
+            self.add_tags(new_path, tags)
+            if file_extension.lower() == ".lep":
+                # convert jpg back to lep
+                completed = subprocess.run(["./lepton-slow-best-ratio", new_path, "-o", path])
+                os.remove(new_path)
+
             return 'added ' + str(len(tags)) + ' tags to ' + path
         else:
             return 'failed to add tags for ' + path
