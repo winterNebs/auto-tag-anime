@@ -16,7 +16,7 @@ Automatically adds booru style tags to an image or directory of images by using 
 - Exempi, install with your package manager
 - Python 3.8 (3.9 will not work for now)
 
-1. `git clone https://github.com/winterNebs/auto-tag-anime`
+1. `git clone https://github.com/winterNebs/auto-tag-anime.git`
 2. `cd auto-tag-anime`
 3. `python3.8 -m pip install -r requirements.txt`
 
