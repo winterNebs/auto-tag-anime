@@ -12,7 +12,7 @@ Automatically adds booru style tags to an image or directory of images by using 
 
 **You will need**:
 - lepton https://github.com/dropbox/lepton, follow instructions and build, then put in auto-anime-tag folder
-- pre-trained model deepdanbooru-v3 from https://github.com/KichangKim/DeepDanbooru, grab the model from the 'releases' section, or train your own, then put in auto-anime-tag folder
+- pre-trained model deepdanbooru-v3 from https://github.com/KichangKim/DeepDanbooru, grab the model from the 'releases' section, or train your own, put the files in `auto-anime-tag/deep`
 - Exempi, install with your package manager
 - Python 3.8 (3.9 will not work for now)
 
