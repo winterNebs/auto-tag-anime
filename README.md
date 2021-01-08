@@ -24,10 +24,21 @@ Automatically adds booru style tags to an image or directory of images by using 
 3. `python3.8 -m pip install -r requirements.txt`
 
 ## How to use
-`python3 auto-tag-anime.py "example.jpg"`
+**tag one image**:
 
-`python3 auto-tag-anime.py "/path/to/directory/"`
+`python3.8 auto-tag-anime.py "example.jpg"`
 
+**tag multiple images in a directory (saves on model loading overhead)**:
+
+`python3.8 auto-tag-anime.py "/path/to/directory/"`
+
+**Skip tagged images**:
+
+`python3.8 auto-tag-anime.py --skip "/path/to/directory/"`
+
+**display help message**:
+
+`python3.8 auto-tag-anime.py -h`
 
 ## Notes
 * See a list of tags the model will predict in 'tags.txt' inside of the deepdanbooru-v3 folder
