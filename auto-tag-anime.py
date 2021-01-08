@@ -3,13 +3,14 @@ import subprocess
 import model
 import sys
 import os
+import argparse
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 
 class addAnimeTags():
-    def __init__(self):
+    def __init__(self, skip=False):
         self.model = model.deepdanbooruModel()
-        pass
+        self.skip=skip
 
     def navigateDir(self, path):
         if os.path.isdir(path):
@@ -36,9 +37,12 @@ class addAnimeTags():
             if completed.returncode != 0:
                 return 'failed to add tags for ' + path
 
-            os.remove(path)
-            # eval then add tags
-            # convert back
+        # skip if has tag
+        if self.skip and tag.check_tag(new_path):
+            if file_extension.lower() == ".lep":
+                # remove jpg
+                os.remove(new_path)
+            return "has tag at " + path
 
         status, tags = self.model.classify_image(new_path)
         if status == 'success':
@@ -46,6 +50,7 @@ class addAnimeTags():
             if file_extension.lower() == ".lep":
                 # convert jpg back to lep
                 completed = subprocess.run(["./lepton-slow-best-ratio", new_path, "-o", path])
+                # remove jpg
                 os.remove(new_path)
 
             return 'added ' + str(len(tags)) + ' tags to ' + path
@@ -56,17 +61,11 @@ class addAnimeTags():
         tag.win_addInfo(file, tags)
 
 
-def parseArgs():
-    if len(sys.argv) < 2:
-        print("no path")
-        sys.exit()
-
-    if not os.path.exists(sys.argv[1]):
-        print('path does not exist')
-        sys.exit()
-
 
 if __name__ == "__main__":
-    parseArgs()
-    addAnimeTags = addAnimeTags()
-    addAnimeTags.navigateDir(sys.argv[1])
+    parser = argparse.ArgumentParser(description="Automatically tag images")
+    parser.add_argument("path", metavar="P", type=str, help="Path to directory or image")
+    parser.add_argument("--skip", dest="skip", action="store_true",help="Skip already tagged images")
+    args=parser.parse_args();
+    addAnimeTags = addAnimeTags(args.skip)
+    addAnimeTags.navigateDir(args.path)
